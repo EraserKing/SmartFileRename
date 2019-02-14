@@ -195,12 +195,13 @@ namespace SmartFileRename
             movieFilePathList.AutoSort = movieAutoSort.Checked;
         }
 
+        // Drag & Drop
+
         private void subtitleListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
             subtitleListView.DoDragDrop(subtitleListView.SelectedItems, DragDropEffects.Move);
         }
 
-        // Drag & Drop
         private void subtitleListView_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -222,7 +223,7 @@ namespace SmartFileRename
             Point clientPoint = subtitleListView.PointToClient(new Point(e.X, e.Y));
             var lvi = subtitleListView.GetItemAt(clientPoint.X, clientPoint.Y);
 
-            if(lvi == null)
+            if (lvi == null)
             {
                 return;
             }
@@ -277,6 +278,49 @@ namespace SmartFileRename
             {
                 FormOperations.ReorderListViewItemByDragDrop(movieFilePathList, movieListView.SelectedIndices.Cast<int>().ToList(), lvi?.Index ?? (movieFilePathList.Count + 1));
             }
+            FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
+        }
+
+
+        private void autoDropPanel_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void autoDropPanel_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] selectedPaths = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (string selectedPath in selectedPaths)
+                {
+                    if (File.Exists(selectedPath))
+                    {
+                        if (FileDataInfo.ParseFileType(selectedPath) == FileDataInfo.FileTypeEnum.Movie)
+                        {
+                            movieFilePathList.Add(selectedPath);
+                        }
+                        else if (FileDataInfo.ParseFileType(selectedPath) == FileDataInfo.FileTypeEnum.Subtitle)
+                        {
+                            subtitleFilePathList.Add(selectedPath);
+                        }
+                    }
+
+                    if (Directory.Exists(selectedPath))
+                    {
+                        subtitleFilePathList.AddRange(Directory.EnumerateFiles(selectedPath).Select(x => new FileDataInfo(x)).Where(x => x.FileType == FileDataInfo.FileTypeEnum.Subtitle));
+                        movieFilePathList.AddRange(Directory.EnumerateFiles(selectedPath).Select(x => new FileDataInfo(x)).Where(x => x.FileType == FileDataInfo.FileTypeEnum.Movie));
+                    }
+                }
+            }
+            FormOperations.RefreshListViewCount(subtitleFilePathList, subtitleListView, subtitleFileCount);
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
         }
 
@@ -382,6 +426,7 @@ namespace SmartFileRename
             FormOperations.RefreshListViewItemDisplayMode(movieListView);
         }
 
+        // Grid Virtual Mode
         private void subtitleListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
             e.Item = new ListViewItem(subtitleFilePathList.GetDisplayValue(e.ItemIndex));

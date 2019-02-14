@@ -60,29 +60,37 @@ namespace SmartFileRename
             return null;
         }
 
-        public FileDataInfo(string filePath)
+        public static FileTypeEnum ParseFileType(string filePath)
         {
-            FilePath = filePath;
+            string extension = Path.GetExtension(filePath).TrimStart('.');
+            FileTypeEnum type;
 
-            if(FileExtension == "ass" || FileExtension == "ssa" || FileExtension == "srt" || FileExtension == "idx" || FileExtension == "sub")
+            if (extension == "ass" || extension == "ssa" || extension == "srt" || extension == "idx" || extension == "sub")
             {
-                FileType = FileTypeEnum.Subtitle;
+                type = FileTypeEnum.Subtitle;
             }
 
-            else if(FileExtension == "mkv" || FileExtension == "mp4" || FileExtension == "avi" || FileExtension == "wmv")
+            else if (extension == "mkv" || extension == "mp4" || extension == "avi" || extension == "wmv")
             {
-                FileType = FileTypeEnum.Movie;
+                type = FileTypeEnum.Movie;
             }
 
-            else if (FileExtension == "mp3" || FileExtension == "flac" || FileExtension == "ape" || FileExtension == "aac" || FileExtension == "mka")
+            else if (extension == "mp3" || extension == "flac" || extension == "ape" || extension == "aac" || extension == "mka")
             {
-                FileType = FileTypeEnum.Audio;
+                type = FileTypeEnum.Audio;
             }
 
             else
             {
-                FileType = FileTypeEnum.Unknown;
+                type = FileTypeEnum.Unknown;
             }
+            return type;
+        }
+
+        public FileDataInfo(string filePath)
+        {
+            FilePath = filePath;
+            FileType = ParseFileType(filePath);
         }
         public int CompareTo(object obj)
         {

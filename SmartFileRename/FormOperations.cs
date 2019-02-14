@@ -83,6 +83,11 @@ namespace SmartFileRename
             filePathList.RemoveAll(key.Split(';'));
         }
 
+        public static void FilterType(FileList filePathList, FileDataInfo.FileTypeEnum fileType)
+        {
+            filePathList.RemoveAll(x => x.FileType != fileType);
+        }
+
         public static void MoveListViewItemUp(ListView listView, FileList fileList)
         {
             fileList.MoveUp(listView.SelectedIndices.Cast<int>().ToArray());

@@ -17,6 +17,14 @@ namespace SmartFileRename
 
     public class FileDataInfo : IComparable
     {
+        public enum FileTypeEnum
+        {
+            Movie,
+            Subtitle,
+            Audio,
+            Unknown
+        }
+
         private static string[] availableLanguages = new string[]
         {
             "gb", "GB",
@@ -38,6 +46,7 @@ namespace SmartFileRename
         public string FileName => Path.GetFileNameWithoutExtension(FilePath);
         public string FileExtension => Path.GetExtension(FilePath).TrimStart('.');
         public bool Exists => File.Exists(FilePath);
+        public FileTypeEnum FileType { get; private set; }
 
         public string ParseLanguage()
         {
@@ -54,6 +63,26 @@ namespace SmartFileRename
         public FileDataInfo(string filePath)
         {
             FilePath = filePath;
+
+            if(FileExtension == "ass" || FileExtension == "ssa" || FileExtension == "srt" || FileExtension == "idx" || FileExtension == "sub")
+            {
+                FileType = FileTypeEnum.Subtitle;
+            }
+
+            else if(FileExtension == "mkv" || FileExtension == "mp4" || FileExtension == "avi" || FileExtension == "wmv")
+            {
+                FileType = FileTypeEnum.Movie;
+            }
+
+            else if (FileExtension == "mp3" || FileExtension == "flac" || FileExtension == "ape" || FileExtension == "aac" || FileExtension == "mka")
+            {
+                FileType = FileTypeEnum.Audio;
+            }
+
+            else
+            {
+                FileType = FileTypeEnum.Unknown;
+            }
         }
         public int CompareTo(object obj)
         {
@@ -199,6 +228,13 @@ namespace SmartFileRename
         public int RemoveAll(IEnumerable<string> mustHaveKeys)
         {
             int result = this.fileDataInfoList.RemoveAll(x => mustHaveKeys.All(y => !x.FilePath.Contains(y)));
+            BreakCommonPath();
+            return result;
+        }
+
+        public int RemoveAll(Predicate<FileDataInfo> match)
+        {
+            int result = this.fileDataInfoList.RemoveAll(x => match(x));
             BreakCommonPath();
             return result;
         }

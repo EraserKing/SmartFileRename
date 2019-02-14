@@ -106,7 +106,7 @@ namespace SmartFileRename
 
         private void subtitleAutoFilter_Click(object sender, EventArgs e)
         {
-            FormOperations.FilterEntry(subtitleFilePathList, ".ass;.ssa;.srt;.idx;.sub");
+            FormOperations.FilterType(subtitleFilePathList, FileDataInfo.FileTypeEnum.Subtitle);
             FormOperations.RefreshListViewCount(subtitleFilePathList, subtitleListView, subtitleFileCount);
         }
 
@@ -123,7 +123,7 @@ namespace SmartFileRename
 
         private void movieAutoFilter_Click(object sender, EventArgs e)
         {
-            FormOperations.FilterEntry(movieFilePathList, ".mkv;.mp4;.avi;.wmv");
+            FormOperations.FilterType(movieFilePathList, FileDataInfo.FileTypeEnum.Movie);
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
         }
 

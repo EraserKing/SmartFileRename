@@ -54,7 +54,7 @@ namespace SmartFileRename
                     RenameInfo renameInfo = new RenameInfo()
                     {
                         MovieFileName = movieFile.FileName,
-                        SubtitleGroup = renameOptions.SpecifySubtitleGroup ? renameOptions.SubtitleGroup : null,
+                        SubtitleGroup = renameOptions.SpecifySubtitleGroup ? renameOptions.SubtitleGroup : subtitleFile.ParseSubtitleGroup(),
                         Language = renameOptions.SpecifyLanguage ? renameOptions.Language : subtitleFile.ParseLanguage(),
                         Extension = renameOptions.SpecifyExtension ? renameOptions.Extension : subtitleFile.FileExtension
                     };

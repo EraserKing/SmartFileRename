@@ -48,17 +48,26 @@ namespace SmartFileRename
         public bool Exists => File.Exists(FilePath);
         public FileTypeEnum FileType { get; private set; }
 
-        public string ParseLanguage()
+        public static string ParseLanguage(string fileFullName)
         {
             foreach (string language in availableLanguages)
             {
-                if (FileFullName.Contains($".{language}.") || FileFullName.Contains($"[{language}]"))
+                if (fileFullName.Contains($".{language}.") || fileFullName.Contains($"[{language}]"))
                 {
                     return language;
                 }
             }
             return null;
         }
+
+        public string ParseLanguage() => ParseLanguage(this.FileFullName);
+
+        public static string ParseSubtitleGroup(string fileFullName)
+        {
+            return null;
+        }
+
+        public string ParseSubtitleGroup() => ParseSubtitleGroup(this.FileFullName);
 
         public static FileTypeEnum ParseFileType(string filePath)
         {
@@ -87,6 +96,8 @@ namespace SmartFileRename
             return type;
         }
 
+        public FileTypeEnum ParseFileType() => ParseFileType(this.FileFullName);
+
         public FileDataInfo(string filePath)
         {
             FilePath = filePath;
@@ -105,7 +116,18 @@ namespace SmartFileRename
         private List<FileDataInfo> fileDataInfoList = new List<FileDataInfo>();
 
         private bool IsCommonPathReady { get; set; } = false;
-        private string CommonPath { get; set; } = string.Empty;
+        private string _commonPath { get; set; } = string.Empty;
+        private string CommonPath
+        {
+            get
+            {
+                if (!IsCommonPathReady)
+                {
+                    CalculateCommonPath();
+                }
+                return _commonPath;
+            }
+        }
         public bool AutoSort { get; set; } = false;
         public DisplayModeOption DisplayMode { get; set; }
 
@@ -117,14 +139,9 @@ namespace SmartFileRename
 
         private void CalculateCommonPath()
         {
-            if (IsCommonPathReady)
-            {
-                return;
-            }
-
             IsCommonPathReady = true;
 
-            if (this.Count == 0)
+            if (this.fileDataInfoList.Count == 0)
             {
                 return;
             }
@@ -138,7 +155,7 @@ namespace SmartFileRename
                 pathBuilder.Append(Path.DirectorySeparatorChar);
                 if (this.fileDataInfoList.All(x => x.FilePath.StartsWith(pathBuilder.ToString())))
                 {
-                    CommonPath = pathBuilder.ToString();
+                    _commonPath = pathBuilder.ToString();
                     continue;
                 }
                 else
@@ -159,7 +176,6 @@ namespace SmartFileRename
                     return fileDataInfo.FileFullName;
 
                 case DisplayModeOption.DiscrepancyOnly:
-                    CalculateCommonPath();
                     return fileDataInfo.FilePath.Substring(CommonPath.Length);
 
                 default:
@@ -189,12 +205,16 @@ namespace SmartFileRename
 
         public void AddRange(IEnumerable<FileDataInfo> collection)
         {
+            int originalCount = this.fileDataInfoList.Count;
             this.fileDataInfoList.AddRange(collection.Where(x => !Contains(x)));
             if (AutoSort)
             {
                 this.fileDataInfoList.Sort();
             }
-            BreakCommonPath();
+            if (originalCount != this.fileDataInfoList.Count)
+            {
+                BreakCommonPath();
+            }
         }
 
         public void ClearAll()
@@ -214,8 +234,12 @@ namespace SmartFileRename
 
         public void InsertRange(int index, IEnumerable<FileDataInfo> collection)
         {
+            int originalCount = this.fileDataInfoList.Count;
             this.fileDataInfoList.InsertRange(index, collection.Where(x => !Contains(x)));
-            BreakCommonPath();
+            if (originalCount != this.fileDataInfoList.Count)
+            {
+                BreakCommonPath();
+            }
         }
 
         public void RemoveAt(int index)
@@ -224,26 +248,34 @@ namespace SmartFileRename
             BreakCommonPath();
         }
 
-        public void RemoveAt(IList<int> indexes)
+        public void RemoveAt(IEnumerable<int> indexes)
         {
-            for (int i = indexes.Count - 1; i >= 0; i--)
+            foreach (int i in indexes.Reverse())
             {
-                this.RemoveAt(indexes[i]);
+                this.RemoveAt(i);
             }
             BreakCommonPath();
         }
 
         public int RemoveAll(IEnumerable<string> mustHaveKeys)
         {
+            int originalCount = this.fileDataInfoList.Count;
             int result = this.fileDataInfoList.RemoveAll(x => mustHaveKeys.All(y => !x.FilePath.Contains(y)));
-            BreakCommonPath();
+            if (originalCount != this.fileDataInfoList.Count)
+            {
+                BreakCommonPath();
+            }
             return result;
         }
 
         public int RemoveAll(Predicate<FileDataInfo> match)
         {
+            int originalCount = this.fileDataInfoList.Count;
             int result = this.fileDataInfoList.RemoveAll(x => match(x));
-            BreakCommonPath();
+            if (originalCount != this.fileDataInfoList.Count)
+            {
+                BreakCommonPath();
+            }
             return result;
         }
 

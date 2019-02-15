@@ -186,9 +186,33 @@ namespace SmartFileRename
         #endregion Common Path
 
         #region Break operations
-        public void Add(string item) => Add(new FileDataInfo(item));
+        public void Add(string item)
+        {
+            if (File.Exists(item))
+            {
+                AddFile(item);
+            }
+            else if (Directory.Exists(item))
+            {
+                AddFolder(item);
+            }
+        }
 
-        public void Add(FileDataInfo item)
+        public void Add(FileDataInfo item) => AddFile(item);
+
+        public void AddRange(IEnumerable<string> collection)
+        {
+            foreach (string item in collection)
+            {
+                Add(item);
+            }
+        }
+
+        public void AddRange(IEnumerable<FileDataInfo> collection) => AddFiles(collection);
+
+        private void AddFile(string item) => AddFile(new FileDataInfo(item));
+
+        private void AddFile(FileDataInfo item)
         {
             if (!Contains(item))
             {
@@ -201,9 +225,9 @@ namespace SmartFileRename
             }
         }
 
-        public void AddRange(IEnumerable<string> collection) => AddRange(collection.Select(x => new FileDataInfo(x)));
+        private void AddFiles(IEnumerable<string> collection) => AddFiles(collection.Select(x => new FileDataInfo(x)));
 
-        public void AddRange(IEnumerable<FileDataInfo> collection)
+        private void AddFiles(IEnumerable<FileDataInfo> collection)
         {
             int originalCount = this.fileDataInfoList.Count;
             this.fileDataInfoList.AddRange(collection.Where(x => !Contains(x)));
@@ -216,6 +240,8 @@ namespace SmartFileRename
                 BreakCommonPath();
             }
         }
+
+        private void AddFolder(string item) => AddFiles(Directory.EnumerateFiles(item));
 
         public void ClearAll()
         {
@@ -236,6 +262,26 @@ namespace SmartFileRename
         {
             int originalCount = this.fileDataInfoList.Count;
             this.fileDataInfoList.InsertRange(index, collection.Where(x => !Contains(x)));
+            if (originalCount != this.fileDataInfoList.Count)
+            {
+                BreakCommonPath();
+            }
+        }
+
+        public void InsertRange(int index, IEnumerable<string> collection)
+        {
+            int originalCount = this.fileDataInfoList.Count;
+            foreach (string item in collection.Reverse())
+            {
+                if (File.Exists(item) )
+                {
+                    this.fileDataInfoList.Insert(index, new FileDataInfo(item));
+                }
+                else if (Directory.Exists(item))
+                {
+                    this.fileDataInfoList.InsertRange(index, Directory.EnumerateFiles(item).Where(x => !Contains(x)).Select(x => new FileDataInfo(x)));
+                }
+            }
             if (originalCount != this.fileDataInfoList.Count)
             {
                 BreakCommonPath();
@@ -289,14 +335,23 @@ namespace SmartFileRename
 
         public void MoveToIndex(int index, IList<int> selectedIndexes)
         {
-            List<FileDataInfo> resortedItems = new List<FileDataInfo>();
-            resortedItems.AddRange(selectedIndexes.Select(x => this.fileDataInfoList[x]));
+            List<FileDataInfo> resortedItems = selectedIndexes.Select(x => this.fileDataInfoList[x]).ToList();
             foreach (int i in selectedIndexes.Reverse())
             {
                 this.fileDataInfoList.RemoveAt(i);
             }
             index = index - selectedIndexes.Count(x => x < index); // Recalculate the index to insert after the items above the insert position are removed
             this.fileDataInfoList.InsertRange(index, resortedItems);
+        }
+
+        public void MoveToBottom(IList<int> selectedIndexes)
+        {
+            List<FileDataInfo> resortedItems = selectedIndexes.Select(x => this.fileDataInfoList[x]).ToList();
+            foreach (int i in selectedIndexes.Reverse())
+            {
+                this.fileDataInfoList.RemoveAt(i);
+            }
+            this.fileDataInfoList.AddRange(resortedItems);
         }
 
         public void MoveUp(IList<int> selectedIndexes)

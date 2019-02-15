@@ -59,7 +59,7 @@ namespace SmartFileRename
         {
             if (folderBrowseDialog.ShowDialog() == DialogResult.OK)
             {
-                filePathList.AddRange(Directory.EnumerateFiles(folderBrowseDialog.SelectedPath));
+                filePathList.Add(folderBrowseDialog.SelectedPath);
             }
         }
 
@@ -109,14 +109,28 @@ namespace SmartFileRename
         }
 
         #region ToFix
-        public static void ReorderListViewItemByDragDrop(FileList fileList, IList<int> selectedIndexes, int newPosition)
+        public static void ReorderListViewItemByDragDrop(FileList fileList, IList<int> selectedIndexes, int? newPosition)
         {
-            fileList.MoveToIndex(newPosition, selectedIndexes);
+            if (newPosition.HasValue)
+            {
+                fileList.MoveToIndex(newPosition.Value, selectedIndexes);
+            }
+            else
+            {
+                fileList.MoveToBottom(selectedIndexes);
+            }
         }
 
-        public static void AddEntryByDragDrop(FileList fileList, string[] filesPathsToAdd, int newPosition)
+        public static void AddEntryByDragDrop(FileList fileList, string[] filesPathsToAdd, int? newPosition)
         {
-            fileList.InsertRange(newPosition, filesPathsToAdd.Select(x => new FileDataInfo(x)));
+            if (newPosition.HasValue)
+            {
+                fileList.InsertRange(newPosition.Value, filesPathsToAdd);
+            }
+            else
+            {
+                fileList.AddRange(filesPathsToAdd);
+            }
         }
 
         private static bool CanFindInListViewItem(string entryName, ListView listView)

@@ -26,6 +26,7 @@ namespace SmartFileRename
 
         }
 
+        #region Option change
         private void optionSpecifySubtitleGroup_CheckedChanged(object sender, EventArgs e)
         {
             optionSubtitleGroup.Enabled = optionSpecifySubtitleGroup.Checked;
@@ -40,8 +41,9 @@ namespace SmartFileRename
         {
             optionExtension.Enabled = optionSpecifyExtension.Checked;
         }
+        #endregion
 
-        // Add File / Add Folder
+        #region Add File / Add Folder
         private void subtitleAddFile_Click(object sender, EventArgs e)
         {
             FormOperations.AddFile(subtitleAddFileDialog, subtitleFilePathList);
@@ -65,8 +67,9 @@ namespace SmartFileRename
             FormOperations.AddFolder(movieAddFolderDialog, movieFilePathList);
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
         }
+        #endregion
 
-        // Remove Entry
+        #region Remove Entry
         private void subtitleRemoveEntry_Click(object sender, EventArgs e)
         {
             FormOperations.RemoveEntries(subtitleFilePathList, subtitleListView.SelectedIndices.Cast<int>().ToList());
@@ -78,8 +81,9 @@ namespace SmartFileRename
             FormOperations.RemoveEntries(movieFilePathList, movieListView.SelectedIndices.Cast<int>().ToList());
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
         }
+        #endregion
 
-        // Clear
+        #region Clear
         private void subtitleClear_Click(object sender, EventArgs e)
         {
             FormOperations.ClearEntry(subtitleFilePathList);
@@ -92,7 +96,16 @@ namespace SmartFileRename
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
         }
 
-        // Filter
+        private void deleteAllPanel_Click(object sender, EventArgs e)
+        {
+            FormOperations.ClearEntry(subtitleFilePathList);
+            FormOperations.RefreshListViewCount(subtitleFilePathList, subtitleListView, subtitleFileCount);
+            FormOperations.ClearEntry(movieFilePathList);
+            FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
+        }
+        #endregion
+
+        #region Filter
         private void subtitleFilterButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(subtitleFilterBox.Text))
@@ -126,8 +139,9 @@ namespace SmartFileRename
             FormOperations.FilterType(movieFilePathList, FileDataInfo.FileTypeEnum.Movie);
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
         }
+        #endregion
 
-        // Move
+        #region Move
         private void subtitleMoveTop_Click(object sender, EventArgs e)
         {
             FormOperations.MoveListViewItemTop(subtitleListView, subtitleFilePathList);
@@ -183,8 +197,9 @@ namespace SmartFileRename
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
             movieListView.Focus();
         }
+        #endregion
 
-        // Auto sort
+        #region Auto sort
         private void subtitleAutoSort_CheckedChanged(object sender, EventArgs e)
         {
             subtitleFilePathList.AutoSort = subtitleAutoSort.Checked;
@@ -194,9 +209,9 @@ namespace SmartFileRename
         {
             movieFilePathList.AutoSort = movieAutoSort.Checked;
         }
+        #endregion
 
-        // Drag & Drop
-
+        #region Drag & Drop
         private void subtitleListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
             subtitleListView.DoDragDrop(subtitleListView.SelectedItems, DragDropEffects.Move);
@@ -208,7 +223,7 @@ namespace SmartFileRename
             {
                 e.Effect = DragDropEffects.Link;
             }
-            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)) || e.Data.GetDataPresent(typeof(ListView.SelectedIndexCollection)))
             {
                 e.Effect = DragDropEffects.Move;
             }
@@ -223,18 +238,13 @@ namespace SmartFileRename
             Point clientPoint = subtitleListView.PointToClient(new Point(e.X, e.Y));
             var lvi = subtitleListView.GetItemAt(clientPoint.X, clientPoint.Y);
 
-            if (lvi == null)
-            {
-                return;
-            }
-
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                FormOperations.AddEntryByDragDrop(subtitleFilePathList, (string[])e.Data.GetData(DataFormats.FileDrop), lvi.Index);
+                FormOperations.AddEntryByDragDrop(subtitleFilePathList, (string[])e.Data.GetData(DataFormats.FileDrop), lvi?.Index ?? null);
             }
-            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)) || e.Data.GetDataPresent(typeof(ListView.SelectedIndexCollection)))
             {
-                FormOperations.ReorderListViewItemByDragDrop(subtitleFilePathList, subtitleListView.SelectedIndices.Cast<int>().ToList(), lvi.Index);
+                FormOperations.ReorderListViewItemByDragDrop(subtitleFilePathList, subtitleListView.SelectedIndices.Cast<int>().ToList(), lvi?.Index ?? null);
             }
             FormOperations.RefreshListViewCount(subtitleFilePathList, subtitleListView, subtitleFileCount);
         }
@@ -250,7 +260,7 @@ namespace SmartFileRename
             {
                 e.Effect = DragDropEffects.Link;
             }
-            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)) || e.Data.GetDataPresent(typeof(ListView.SelectedIndexCollection)))
             {
                 e.Effect = DragDropEffects.Move;
             }
@@ -265,22 +275,16 @@ namespace SmartFileRename
             Point clientPoint = movieListView.PointToClient(new Point(e.X, e.Y));
             var lvi = movieListView.GetItemAt(clientPoint.X, clientPoint.Y);
 
-            if (lvi == null)
-            {
-                return;
-            }
-
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                FormOperations.AddEntryByDragDrop(movieFilePathList, (string[])e.Data.GetData(DataFormats.FileDrop), lvi?.Index ?? (movieFilePathList.Count + 1));
+                FormOperations.AddEntryByDragDrop(movieFilePathList, (string[])e.Data.GetData(DataFormats.FileDrop), lvi?.Index ?? null);
             }
-            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)) || e.Data.GetDataPresent(typeof(ListView.SelectedIndexCollection)))
             {
-                FormOperations.ReorderListViewItemByDragDrop(movieFilePathList, movieListView.SelectedIndices.Cast<int>().ToList(), lvi?.Index ?? (movieFilePathList.Count + 1));
+                FormOperations.ReorderListViewItemByDragDrop(movieFilePathList, movieListView.SelectedIndices.Cast<int>().ToList(), lvi?.Index ?? null);
             }
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
         }
-
 
         private void autoDropPanel_DragEnter(object sender, DragEventArgs e)
         {
@@ -323,8 +327,9 @@ namespace SmartFileRename
             FormOperations.RefreshListViewCount(subtitleFilePathList, subtitleListView, subtitleFileCount);
             FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
         }
+        #endregion
 
-        // Preview / Rename
+        #region Preview / Rename
         private void previewButton_Click(object sender, EventArgs e)
         {
             try
@@ -394,8 +399,9 @@ namespace SmartFileRename
 
             return RenameOperations.GenerateRenameList(renameOptions);
         }
+        #endregion
 
-        // Display Mode
+        #region Display Mode
         private void displayModeFullName_CheckedChanged(object sender, EventArgs e)
         {
             FormOperations.DisplayMode = DisplayModeOption.Full;
@@ -425,8 +431,9 @@ namespace SmartFileRename
             FormOperations.RefreshListViewItemDisplayMode(subtitleListView);
             FormOperations.RefreshListViewItemDisplayMode(movieListView);
         }
+        #endregion
 
-        // Grid Virtual Mode
+        #region Grid Virtual Mode
         private void subtitleListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
             e.Item = new ListViewItem(subtitleFilePathList.GetDisplayValue(e.ItemIndex));
@@ -447,6 +454,18 @@ namespace SmartFileRename
             }
         }
 
+        private void subtitleListView_Leave(object sender, EventArgs e)
+        {
+            subtitleFilePathList.ClearSelection();
+        }
+
+        private void movieListView_Leave(object sender, EventArgs e)
+        {
+            movieFilePathList.ClearSelection();
+        }
+        #endregion
+
+        #region Keyboard Actions
         private void subtitleListView_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Delete)
@@ -462,15 +481,6 @@ namespace SmartFileRename
                 movieRemoveEntry.PerformClick();
             }
         }
-
-        private void subtitleListView_Leave(object sender, EventArgs e)
-        {
-            subtitleFilePathList.ClearSelection();
-        }
-
-        private void movieListView_Leave(object sender, EventArgs e)
-        {
-            movieFilePathList.ClearSelection();
-        }
+        #endregion
     }
 }

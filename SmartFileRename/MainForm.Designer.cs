@@ -82,6 +82,7 @@
             this.optionSpecifySubtitleGroup = new System.Windows.Forms.CheckBox();
             this.previewButton = new System.Windows.Forms.Button();
             this.renameButton = new System.Windows.Forms.Button();
+            this.deleteAllPanel = new System.Windows.Forms.Panel();
             this.autoDropPanel = new System.Windows.Forms.Panel();
             this.filePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filePanelSplitter)).BeginInit();
@@ -702,6 +703,19 @@
             this.renameButton.UseVisualStyleBackColor = true;
             this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
             // 
+            // deleteAllPanel
+            // 
+            this.deleteAllPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteAllPanel.BackgroundImage = global::SmartFileRename.Properties.Resources.rubbish_bin;
+            this.deleteAllPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.deleteAllPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.deleteAllPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deleteAllPanel.Location = new System.Drawing.Point(797, 462);
+            this.deleteAllPanel.Name = "deleteAllPanel";
+            this.deleteAllPanel.Size = new System.Drawing.Size(187, 187);
+            this.deleteAllPanel.TabIndex = 13;
+            this.deleteAllPanel.Click += new System.EventHandler(this.deleteAllPanel_Click);
+            // 
             // autoDropPanel
             // 
             this.autoDropPanel.AllowDrop = true;
@@ -711,7 +725,7 @@
             this.autoDropPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.autoDropPanel.Location = new System.Drawing.Point(604, 462);
             this.autoDropPanel.Name = "autoDropPanel";
-            this.autoDropPanel.Size = new System.Drawing.Size(198, 187);
+            this.autoDropPanel.Size = new System.Drawing.Size(187, 187);
             this.autoDropPanel.TabIndex = 12;
             this.autoDropPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.autoDropPanel_DragDrop);
             this.autoDropPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.autoDropPanel_DragEnter);
@@ -721,6 +735,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.deleteAllPanel);
             this.Controls.Add(this.autoDropPanel);
             this.Controls.Add(this.renameButton);
             this.Controls.Add(this.previewButton);
@@ -804,6 +819,7 @@
         private System.Windows.Forms.TextBox optionLanguage;
         private System.Windows.Forms.CheckBox optionSpecifyLanguage;
         private System.Windows.Forms.Panel autoDropPanel;
+        private System.Windows.Forms.Panel deleteAllPanel;
     }
 }
 

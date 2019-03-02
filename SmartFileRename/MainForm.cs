@@ -334,6 +334,11 @@ namespace SmartFileRename
         {
             try
             {
+                if (!CheckFileTypeMatch())
+                {
+                    MessageBox.Show("Preview aborted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 FileList finalFilePaths = InitializeRenameList();
 
                 ResultForm previewForm = new ResultForm(subtitleFilePathList, finalFilePaths);
@@ -350,6 +355,11 @@ namespace SmartFileRename
         {
             try
             {
+                if (!CheckFileTypeMatch())
+                {
+                    MessageBox.Show("Rename aborted", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 FileList finalFilePaths = InitializeRenameList();
                 List<string> errorList = RenameOperations.RenameFiles(subtitleFilePathList, finalFilePaths);
 
@@ -376,8 +386,24 @@ namespace SmartFileRename
             }
         }
 
+        private bool CheckFileTypeMatch()
+        {
+            if (subtitleFilePathList.Any(x => x.FileType != FileDataInfo.FileTypeEnum.Subtitle) && MessageBox.Show("Some files in subtitle list may not be subtitle files, continue?", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return false;
+            }
+
+            if (movieFilePathList.Any(x => x.FileType != FileDataInfo.FileTypeEnum.Movie) && MessageBox.Show("Some files in movie list may not be movie files, continue?", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return false;
+            }
+            return true;
+        }
+
         private FileList InitializeRenameList()
         {
+
+
             RenameOptions renameOptions = new RenameOptions
             {
                 SubtitleFileList = subtitleFilePathList,

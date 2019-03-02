@@ -198,6 +198,14 @@ namespace SmartFileRename
             }
         }
 
+        public void AddVirtualItem(string item)
+        {
+            if (!Contains(item))
+            {
+                AddFile(item);
+            }
+        }
+
         public void Add(FileDataInfo item) => AddFile(item);
 
         public void AddRange(IEnumerable<string> collection)

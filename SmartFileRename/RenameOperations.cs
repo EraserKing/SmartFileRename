@@ -69,7 +69,7 @@ namespace SmartFileRename
                     {
                         throw new InvalidOperationException($"Duplicated final file path {subtitleFile.FileFullName} TO {finalFilePath}");
                     }
-                    finalFileList.Add(finalFilePath);
+                    finalFileList.AddVirtualItem(finalFilePath);
                 }
             }
 

@@ -37,7 +37,7 @@ namespace SmartFileRename
 
             if (renameOptions.SubtitleFileList.Count % renameOptions.MovieFileList.Count != 0 || renameOptions.SubtitleFileList.Count < renameOptions.MovieFileList.Count)
             {
-                throw new InvalidOperationException("File count error");
+                throw new InvalidOperationException("File count error, the file count of subtitle / movie must be an integer");
             }
 
             RenameTemplate renameTemplate = new RenameTemplate(renameOptions.Template);

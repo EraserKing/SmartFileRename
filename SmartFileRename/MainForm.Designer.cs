@@ -271,7 +271,7 @@
             this.subtitleListView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.subtitleListView_RetrieveVirtualItem);
             this.subtitleListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.subtitleListView_DragDrop);
             this.subtitleListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.subtitleListView_DragEnter);
-            this.subtitleListView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.subtitleListView_KeyPress);
+            this.subtitleListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.subtitleListView_KeyDown);
             this.subtitleListView.Leave += new System.EventHandler(this.subtitleListView_Leave);
             // 
             // subtitleFileName
@@ -404,7 +404,7 @@
             this.movieListView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.movieListView_RetrieveVirtualItem);
             this.movieListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.movieListView_DragDrop);
             this.movieListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.movieListView_DragEnter);
-            this.movieListView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.movieListView_KeyPress);
+            this.movieListView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.movieListView_KeyDown);
             this.movieListView.Leave += new System.EventHandler(this.movieListView_Leave);
             // 
             // movieFileName

@@ -492,17 +492,17 @@ namespace SmartFileRename
         #endregion
 
         #region Keyboard Actions
-        private void subtitleListView_KeyPress(object sender, KeyPressEventArgs e)
+        private void subtitleListView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Delete)
+            if (e.KeyCode == Keys.Delete)
             {
                 subtitleRemoveEntry.PerformClick();
             }
         }
 
-        private void movieListView_KeyPress(object sender, KeyPressEventArgs e)
+        private void movieListView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Delete)
+            if (e.KeyCode == Keys.Delete)
             {
                 movieRemoveEntry.PerformClick();
             }

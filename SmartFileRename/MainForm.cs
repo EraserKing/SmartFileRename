@@ -359,6 +359,10 @@ namespace SmartFileRename
                 previewForm.RenameTitle("Preview");
                 previewForm.ShowDialog();
             }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show("An error occurred\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (InvalidOperationException ex)
             {
                 MessageBox.Show("An error occurred\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -392,6 +396,10 @@ namespace SmartFileRename
                 {
                     MessageBox.Show("All files have been renamed successfully.", "Conguratulations", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show("An error occurred\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InvalidOperationException ex)
             {

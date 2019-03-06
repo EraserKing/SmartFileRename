@@ -84,6 +84,8 @@
             this.renameButton = new System.Windows.Forms.Button();
             this.deleteAllPanel = new System.Windows.Forms.Panel();
             this.autoDropPanel = new System.Windows.Forms.Panel();
+            this.movieSort = new System.Windows.Forms.Button();
+            this.subtitleSort = new System.Windows.Forms.Button();
             this.filePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filePanelSplitter)).BeginInit();
             this.filePanelSplitter.Panel1.SuspendLayout();
@@ -132,6 +134,7 @@
             this.subtitleGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.subtitleGroupBox.Controls.Add(this.subtitleSort);
             this.subtitleGroupBox.Controls.Add(this.subtitleAutoFilter);
             this.subtitleGroupBox.Controls.Add(this.subtitleAutoSort);
             this.subtitleGroupBox.Controls.Add(this.subtitleClear);
@@ -156,9 +159,9 @@
             // subtitleAutoFilter
             // 
             this.subtitleAutoFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.subtitleAutoFilter.Location = new System.Drawing.Point(168, 399);
+            this.subtitleAutoFilter.Location = new System.Drawing.Point(158, 399);
             this.subtitleAutoFilter.Name = "subtitleAutoFilter";
-            this.subtitleAutoFilter.Size = new System.Drawing.Size(50, 23);
+            this.subtitleAutoFilter.Size = new System.Drawing.Size(40, 23);
             this.subtitleAutoFilter.TabIndex = 22;
             this.subtitleAutoFilter.Text = "Auto";
             this.subtitleAutoFilter.UseVisualStyleBackColor = true;
@@ -168,7 +171,7 @@
             // 
             this.subtitleAutoSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.subtitleAutoSort.AutoSize = true;
-            this.subtitleAutoSort.Location = new System.Drawing.Point(291, 403);
+            this.subtitleAutoSort.Location = new System.Drawing.Point(250, 403);
             this.subtitleAutoSort.Name = "subtitleAutoSort";
             this.subtitleAutoSort.Size = new System.Drawing.Size(70, 17);
             this.subtitleAutoSort.TabIndex = 30;
@@ -179,10 +182,10 @@
             // subtitleClear
             // 
             this.subtitleClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.subtitleClear.Location = new System.Drawing.Point(508, 399);
+            this.subtitleClear.Location = new System.Drawing.Point(509, 399);
             this.subtitleClear.Name = "subtitleClear";
             this.subtitleClear.Size = new System.Drawing.Size(23, 23);
-            this.subtitleClear.TabIndex = 34;
+            this.subtitleClear.TabIndex = 43;
             this.subtitleClear.Text = "X";
             this.subtitleClear.UseVisualStyleBackColor = true;
             this.subtitleClear.Click += new System.EventHandler(this.subtitleClear_Click);
@@ -190,10 +193,10 @@
             // subtitleRemoveEntry
             // 
             this.subtitleRemoveEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.subtitleRemoveEntry.Location = new System.Drawing.Point(479, 399);
+            this.subtitleRemoveEntry.Location = new System.Drawing.Point(480, 399);
             this.subtitleRemoveEntry.Name = "subtitleRemoveEntry";
             this.subtitleRemoveEntry.Size = new System.Drawing.Size(23, 23);
-            this.subtitleRemoveEntry.TabIndex = 33;
+            this.subtitleRemoveEntry.TabIndex = 42;
             this.subtitleRemoveEntry.Text = "-";
             this.subtitleRemoveEntry.UseVisualStyleBackColor = true;
             this.subtitleRemoveEntry.Click += new System.EventHandler(this.subtitleRemoveEntry_Click);
@@ -201,10 +204,10 @@
             // subtitleAddFolder
             // 
             this.subtitleAddFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.subtitleAddFolder.Location = new System.Drawing.Point(423, 399);
+            this.subtitleAddFolder.Location = new System.Drawing.Point(424, 399);
             this.subtitleAddFolder.Name = "subtitleAddFolder";
             this.subtitleAddFolder.Size = new System.Drawing.Size(50, 23);
-            this.subtitleAddFolder.TabIndex = 32;
+            this.subtitleAddFolder.TabIndex = 41;
             this.subtitleAddFolder.Text = "+Folder";
             this.subtitleAddFolder.UseVisualStyleBackColor = true;
             this.subtitleAddFolder.Click += new System.EventHandler(this.subtitleAddFolder_Click);
@@ -215,7 +218,7 @@
             this.subtitleAddFile.Location = new System.Drawing.Point(367, 399);
             this.subtitleAddFile.Name = "subtitleAddFile";
             this.subtitleAddFile.Size = new System.Drawing.Size(50, 23);
-            this.subtitleAddFile.TabIndex = 31;
+            this.subtitleAddFile.TabIndex = 40;
             this.subtitleAddFile.Text = "+File";
             this.subtitleAddFile.UseVisualStyleBackColor = true;
             this.subtitleAddFile.Click += new System.EventHandler(this.subtitleAddFile_Click);
@@ -224,7 +227,7 @@
             // 
             this.subtitleFileCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.subtitleFileCount.AutoSize = true;
-            this.subtitleFileCount.Location = new System.Drawing.Point(224, 404);
+            this.subtitleFileCount.Location = new System.Drawing.Point(204, 404);
             this.subtitleFileCount.Name = "subtitleFileCount";
             this.subtitleFileCount.Size = new System.Drawing.Size(40, 13);
             this.subtitleFileCount.TabIndex = 23;
@@ -235,7 +238,7 @@
             this.subtitleFilterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.subtitleFilterButton.Location = new System.Drawing.Point(112, 399);
             this.subtitleFilterButton.Name = "subtitleFilterButton";
-            this.subtitleFilterButton.Size = new System.Drawing.Size(50, 23);
+            this.subtitleFilterButton.Size = new System.Drawing.Size(40, 23);
             this.subtitleFilterButton.TabIndex = 21;
             this.subtitleFilterButton.Text = "Filter";
             this.subtitleFilterButton.UseVisualStyleBackColor = true;
@@ -245,7 +248,7 @@
             // 
             this.subtitleFilterBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.subtitleFilterBox.Location = new System.Drawing.Point(6, 401);
+            this.subtitleFilterBox.Location = new System.Drawing.Point(6, 400);
             this.subtitleFilterBox.Name = "subtitleFilterBox";
             this.subtitleFilterBox.Size = new System.Drawing.Size(100, 20);
             this.subtitleFilterBox.TabIndex = 20;
@@ -328,6 +331,7 @@
             this.movieGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.movieGroupBox.Controls.Add(this.movieSort);
             this.movieGroupBox.Controls.Add(this.movieAutoFilter);
             this.movieGroupBox.Controls.Add(this.movieAutoSort);
             this.movieGroupBox.Controls.Add(this.movieClear);
@@ -352,9 +356,9 @@
             // movieAutoFilter
             // 
             this.movieAutoFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieAutoFilter.Location = new System.Drawing.Point(168, 399);
+            this.movieAutoFilter.Location = new System.Drawing.Point(158, 399);
             this.movieAutoFilter.Name = "movieAutoFilter";
-            this.movieAutoFilter.Size = new System.Drawing.Size(50, 23);
+            this.movieAutoFilter.Size = new System.Drawing.Size(40, 23);
             this.movieAutoFilter.TabIndex = 22;
             this.movieAutoFilter.Text = "Auto";
             this.movieAutoFilter.UseVisualStyleBackColor = true;
@@ -364,7 +368,7 @@
             // 
             this.movieAutoSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.movieAutoSort.AutoSize = true;
-            this.movieAutoSort.Location = new System.Drawing.Point(296, 403);
+            this.movieAutoSort.Location = new System.Drawing.Point(250, 403);
             this.movieAutoSort.Name = "movieAutoSort";
             this.movieAutoSort.Size = new System.Drawing.Size(70, 17);
             this.movieAutoSort.TabIndex = 30;
@@ -375,10 +379,10 @@
             // movieClear
             // 
             this.movieClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieClear.Location = new System.Drawing.Point(513, 399);
+            this.movieClear.Location = new System.Drawing.Point(509, 399);
             this.movieClear.Name = "movieClear";
             this.movieClear.Size = new System.Drawing.Size(23, 23);
-            this.movieClear.TabIndex = 34;
+            this.movieClear.TabIndex = 43;
             this.movieClear.Text = "X";
             this.movieClear.UseVisualStyleBackColor = true;
             this.movieClear.Click += new System.EventHandler(this.movieClear_Click);
@@ -395,7 +399,7 @@
             this.movieListView.GridLines = true;
             this.movieListView.Location = new System.Drawing.Point(6, 19);
             this.movieListView.Name = "movieListView";
-            this.movieListView.Size = new System.Drawing.Size(530, 374);
+            this.movieListView.Size = new System.Drawing.Size(526, 374);
             this.movieListView.TabIndex = 0;
             this.movieListView.UseCompatibleStateImageBehavior = false;
             this.movieListView.View = System.Windows.Forms.View.Details;
@@ -415,10 +419,10 @@
             // movieRemoveEntry
             // 
             this.movieRemoveEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieRemoveEntry.Location = new System.Drawing.Point(484, 399);
+            this.movieRemoveEntry.Location = new System.Drawing.Point(480, 399);
             this.movieRemoveEntry.Name = "movieRemoveEntry";
             this.movieRemoveEntry.Size = new System.Drawing.Size(23, 23);
-            this.movieRemoveEntry.TabIndex = 33;
+            this.movieRemoveEntry.TabIndex = 42;
             this.movieRemoveEntry.Text = "-";
             this.movieRemoveEntry.UseVisualStyleBackColor = true;
             this.movieRemoveEntry.Click += new System.EventHandler(this.movieRemoveEntry_Click);
@@ -426,7 +430,7 @@
             // movieMovieBottom
             // 
             this.movieMovieBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieMovieBottom.Location = new System.Drawing.Point(542, 209);
+            this.movieMovieBottom.Location = new System.Drawing.Point(538, 209);
             this.movieMovieBottom.Name = "movieMovieBottom";
             this.movieMovieBottom.Size = new System.Drawing.Size(23, 23);
             this.movieMovieBottom.TabIndex = 13;
@@ -437,10 +441,10 @@
             // movieAddFolder
             // 
             this.movieAddFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieAddFolder.Location = new System.Drawing.Point(428, 399);
+            this.movieAddFolder.Location = new System.Drawing.Point(424, 399);
             this.movieAddFolder.Name = "movieAddFolder";
             this.movieAddFolder.Size = new System.Drawing.Size(50, 23);
-            this.movieAddFolder.TabIndex = 32;
+            this.movieAddFolder.TabIndex = 41;
             this.movieAddFolder.Text = "+Folder";
             this.movieAddFolder.UseVisualStyleBackColor = true;
             this.movieAddFolder.Click += new System.EventHandler(this.movieAddFolder_Click);
@@ -448,7 +452,7 @@
             // movieMovieDown
             // 
             this.movieMovieDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieMovieDown.Location = new System.Drawing.Point(542, 180);
+            this.movieMovieDown.Location = new System.Drawing.Point(538, 180);
             this.movieMovieDown.Name = "movieMovieDown";
             this.movieMovieDown.Size = new System.Drawing.Size(23, 23);
             this.movieMovieDown.TabIndex = 12;
@@ -459,10 +463,10 @@
             // movieAddFile
             // 
             this.movieAddFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieAddFile.Location = new System.Drawing.Point(372, 399);
+            this.movieAddFile.Location = new System.Drawing.Point(367, 399);
             this.movieAddFile.Name = "movieAddFile";
             this.movieAddFile.Size = new System.Drawing.Size(50, 23);
-            this.movieAddFile.TabIndex = 31;
+            this.movieAddFile.TabIndex = 40;
             this.movieAddFile.Text = "+File";
             this.movieAddFile.UseVisualStyleBackColor = true;
             this.movieAddFile.Click += new System.EventHandler(this.movieAddFile_Click);
@@ -470,7 +474,7 @@
             // movieMovieTop
             // 
             this.movieMovieTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieMovieTop.Location = new System.Drawing.Point(542, 120);
+            this.movieMovieTop.Location = new System.Drawing.Point(538, 120);
             this.movieMovieTop.Name = "movieMovieTop";
             this.movieMovieTop.Size = new System.Drawing.Size(23, 23);
             this.movieMovieTop.TabIndex = 10;
@@ -482,7 +486,7 @@
             // 
             this.movieFileCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.movieFileCount.AutoSize = true;
-            this.movieFileCount.Location = new System.Drawing.Point(224, 404);
+            this.movieFileCount.Location = new System.Drawing.Point(204, 404);
             this.movieFileCount.Name = "movieFileCount";
             this.movieFileCount.Size = new System.Drawing.Size(40, 13);
             this.movieFileCount.TabIndex = 23;
@@ -491,7 +495,7 @@
             // movieMovieUp
             // 
             this.movieMovieUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieMovieUp.Location = new System.Drawing.Point(542, 150);
+            this.movieMovieUp.Location = new System.Drawing.Point(538, 150);
             this.movieMovieUp.Name = "movieMovieUp";
             this.movieMovieUp.Size = new System.Drawing.Size(23, 23);
             this.movieMovieUp.TabIndex = 11;
@@ -504,7 +508,7 @@
             this.movieFilterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.movieFilterButton.Location = new System.Drawing.Point(112, 399);
             this.movieFilterButton.Name = "movieFilterButton";
-            this.movieFilterButton.Size = new System.Drawing.Size(50, 23);
+            this.movieFilterButton.Size = new System.Drawing.Size(40, 23);
             this.movieFilterButton.TabIndex = 21;
             this.movieFilterButton.Text = "Filter";
             this.movieFilterButton.UseVisualStyleBackColor = true;
@@ -514,7 +518,7 @@
             // 
             this.movieFilterBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.movieFilterBox.Location = new System.Drawing.Point(6, 401);
+            this.movieFilterBox.Location = new System.Drawing.Point(6, 400);
             this.movieFilterBox.Name = "movieFilterBox";
             this.movieFilterBox.Size = new System.Drawing.Size(100, 20);
             this.movieFilterBox.TabIndex = 20;
@@ -730,6 +734,26 @@
             this.autoDropPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.autoDropPanel_DragDrop);
             this.autoDropPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.autoDropPanel_DragEnter);
             // 
+            // movieSort
+            // 
+            this.movieSort.Location = new System.Drawing.Point(321, 399);
+            this.movieSort.Name = "movieSort";
+            this.movieSort.Size = new System.Drawing.Size(40, 23);
+            this.movieSort.TabIndex = 31;
+            this.movieSort.Text = "Sort";
+            this.movieSort.UseVisualStyleBackColor = true;
+            this.movieSort.Click += new System.EventHandler(this.movieSort_Click);
+            // 
+            // subtitleSort
+            // 
+            this.subtitleSort.Location = new System.Drawing.Point(321, 399);
+            this.subtitleSort.Name = "subtitleSort";
+            this.subtitleSort.Size = new System.Drawing.Size(40, 23);
+            this.subtitleSort.TabIndex = 31;
+            this.subtitleSort.Text = "Sort";
+            this.subtitleSort.UseVisualStyleBackColor = true;
+            this.subtitleSort.Click += new System.EventHandler(this.subtitleSort_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -820,6 +844,8 @@
         private System.Windows.Forms.CheckBox optionSpecifyLanguage;
         private System.Windows.Forms.Panel autoDropPanel;
         private System.Windows.Forms.Panel deleteAllPanel;
+        private System.Windows.Forms.Button subtitleSort;
+        private System.Windows.Forms.Button movieSort;
     }
 }
 

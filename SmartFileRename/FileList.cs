@@ -48,6 +48,8 @@ namespace SmartFileRename
         public bool Exists => File.Exists(FilePath);
         public FileTypeEnum FileType { get; private set; }
 
+        public override string ToString() => FilePath;
+
         public static string ParseLanguage(string fileFullName)
         {
             foreach (string language in availableLanguages)
@@ -227,7 +229,7 @@ namespace SmartFileRename
                 this.fileDataInfoList.Add(item);
                 if (AutoSort)
                 {
-                    this.fileDataInfoList.Sort();
+                    this.Sort();
                 }
                 BreakCommonPath();
             }
@@ -241,7 +243,7 @@ namespace SmartFileRename
             this.fileDataInfoList.AddRange(collection.Where(x => !Contains(x)));
             if (AutoSort)
             {
-                this.fileDataInfoList.Sort();
+                this.Sort();
             }
             if (originalCount != this.fileDataInfoList.Count)
             {
@@ -262,6 +264,10 @@ namespace SmartFileRename
             if (!Contains(item))
             {
                 this.fileDataInfoList.Insert(index, item);
+                if (AutoSort)
+                {
+                    this.Sort();
+                }
                 BreakCommonPath();
             }
         }
@@ -270,6 +276,10 @@ namespace SmartFileRename
         {
             int originalCount = this.fileDataInfoList.Count;
             this.fileDataInfoList.InsertRange(index, collection.Where(x => !Contains(x)));
+            if (AutoSort)
+            {
+                this.Sort();
+            }
             if (originalCount != this.fileDataInfoList.Count)
             {
                 BreakCommonPath();
@@ -289,6 +299,10 @@ namespace SmartFileRename
                 {
                     this.fileDataInfoList.InsertRange(index, Directory.EnumerateFiles(item).Where(x => !Contains(x)).Select(x => new FileDataInfo(x)));
                 }
+            }
+            if (AutoSort)
+            {
+                this.Sort();
             }
             if (originalCount != this.fileDataInfoList.Count)
             {
@@ -336,6 +350,11 @@ namespace SmartFileRename
         #endregion Break operations
 
         #region Non-break operations
+        public void Sort()
+        {
+            this.fileDataInfoList.Sort();
+        }
+
         public void ClearSelection()
         {
             this.fileDataInfoList.ForEach(x => x.IsSelected = false);

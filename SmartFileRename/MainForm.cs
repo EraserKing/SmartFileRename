@@ -209,6 +209,20 @@ namespace SmartFileRename
         {
             movieFilePathList.AutoSort = movieAutoSort.Checked;
         }
+
+        private void subtitleSort_Click(object sender, EventArgs e)
+        {
+            subtitleFilePathList.Sort();
+            subtitleListView.VirtualListSize = 0;
+            subtitleListView.VirtualListSize = subtitleFilePathList.Count;
+        }
+
+        private void movieSort_Click(object sender, EventArgs e)
+        {
+            movieFilePathList.Sort();
+            movieListView.VirtualListSize = 0;
+            movieListView.VirtualListSize = movieFilePathList.Count;
+        }
         #endregion
 
         #region Drag & Drop

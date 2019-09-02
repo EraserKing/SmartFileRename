@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.previewListView = new System.Windows.Forms.ListView();
-            this.buttonClose = new System.Windows.Forms.Button();
             this.originalFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.finalFinal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonClose = new System.Windows.Forms.Button();
             this.showFileNameOnly = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -43,12 +43,23 @@
             this.previewListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.originalFile,
             this.finalFinal});
+            this.previewListView.HideSelection = false;
             this.previewListView.Location = new System.Drawing.Point(12, 12);
             this.previewListView.Name = "previewListView";
             this.previewListView.Size = new System.Drawing.Size(810, 408);
             this.previewListView.TabIndex = 0;
             this.previewListView.UseCompatibleStateImageBehavior = false;
             this.previewListView.View = System.Windows.Forms.View.Details;
+            // 
+            // originalFile
+            // 
+            this.originalFile.Text = "Before rename";
+            this.originalFile.Width = 400;
+            // 
+            // finalFinal
+            // 
+            this.finalFinal.Text = "After rename";
+            this.finalFinal.Width = 400;
             // 
             // buttonClose
             // 
@@ -60,16 +71,6 @@
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            // 
-            // originalFile
-            // 
-            this.originalFile.Text = "Before rename";
-            this.originalFile.Width = 400;
-            // 
-            // finalFinal
-            // 
-            this.finalFinal.Text = "After rename";
-            this.finalFinal.Width = 400;
             // 
             // showFileNameOnly
             // 
@@ -83,16 +84,16 @@
             this.showFileNameOnly.UseVisualStyleBackColor = true;
             this.showFileNameOnly.CheckedChanged += new System.EventHandler(this.showFileNameOnly_CheckedChanged);
             // 
-            // PreviewForm
+            // ResultForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(834, 461);
             this.Controls.Add(this.showFileNameOnly);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.previewListView);
             this.MinimumSize = new System.Drawing.Size(850, 500);
-            this.Name = "PreviewForm";
+            this.Name = "ResultForm";
             this.Text = "Preview";
             this.ResumeLayout(false);
             this.PerformLayout();

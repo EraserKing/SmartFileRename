@@ -86,6 +86,7 @@
             this.renameButton = new System.Windows.Forms.Button();
             this.deleteAllPanel = new System.Windows.Forms.Panel();
             this.autoDropPanel = new System.Windows.Forms.Panel();
+            this.optionAlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.filePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filePanelSplitter)).BeginInit();
             this.filePanelSplitter.Panel1.SuspendLayout();
@@ -715,7 +716,7 @@
             this.previewButton.Location = new System.Drawing.Point(1016, 626);
             this.previewButton.Name = "previewButton";
             this.previewButton.Size = new System.Drawing.Size(75, 23);
-            this.previewButton.TabIndex = 10;
+            this.previewButton.TabIndex = 11;
             this.previewButton.Text = "Preview";
             this.previewButton.UseVisualStyleBackColor = true;
             this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
@@ -726,7 +727,7 @@
             this.renameButton.Location = new System.Drawing.Point(1097, 626);
             this.renameButton.Name = "renameButton";
             this.renameButton.Size = new System.Drawing.Size(75, 23);
-            this.renameButton.TabIndex = 11;
+            this.renameButton.TabIndex = 12;
             this.renameButton.Text = "Rename";
             this.renameButton.UseVisualStyleBackColor = true;
             this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
@@ -758,11 +759,23 @@
             this.autoDropPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.autoDropPanel_DragDrop);
             this.autoDropPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.autoDropPanel_DragEnter);
             // 
+            // optionAlwaysOnTop
+            // 
+            this.optionAlwaysOnTop.AutoSize = true;
+            this.optionAlwaysOnTop.Location = new System.Drawing.Point(1016, 604);
+            this.optionAlwaysOnTop.Name = "optionAlwaysOnTop";
+            this.optionAlwaysOnTop.Size = new System.Drawing.Size(98, 17);
+            this.optionAlwaysOnTop.TabIndex = 10;
+            this.optionAlwaysOnTop.Text = "Always On Top";
+            this.optionAlwaysOnTop.UseVisualStyleBackColor = true;
+            this.optionAlwaysOnTop.CheckedChanged += new System.EventHandler(this.OptionAlwaysOnTop_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.optionAlwaysOnTop);
             this.Controls.Add(this.deleteAllPanel);
             this.Controls.Add(this.autoDropPanel);
             this.Controls.Add(this.renameButton);
@@ -787,6 +800,7 @@
             this.optionDisplayModeGroupBox.ResumeLayout(false);
             this.optionDisplayModeGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -850,6 +864,7 @@
         private System.Windows.Forms.Panel deleteAllPanel;
         private System.Windows.Forms.Button subtitleSort;
         private System.Windows.Forms.Button movieSort;
+        private System.Windows.Forms.CheckBox optionAlwaysOnTop;
     }
 }
 

@@ -530,5 +530,10 @@ namespace SmartFileRename
             }
         }
         #endregion
+
+        private void OptionAlwaysOnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = this.optionAlwaysOnTop.Checked;
+        }
     }
 }

@@ -31,6 +31,7 @@
             this.filePanel = new System.Windows.Forms.Panel();
             this.filePanelSplitter = new System.Windows.Forms.SplitContainer();
             this.subtitleGroupBox = new System.Windows.Forms.GroupBox();
+            this.subtitleSort = new System.Windows.Forms.Button();
             this.subtitleAutoFilter = new System.Windows.Forms.Button();
             this.subtitleAutoSort = new System.Windows.Forms.CheckBox();
             this.subtitleClear = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@
             this.subtitleMoveUp = new System.Windows.Forms.Button();
             this.subtitleMoveTop = new System.Windows.Forms.Button();
             this.movieGroupBox = new System.Windows.Forms.GroupBox();
+            this.movieSort = new System.Windows.Forms.Button();
             this.movieAutoFilter = new System.Windows.Forms.Button();
             this.movieAutoSort = new System.Windows.Forms.CheckBox();
             this.movieClear = new System.Windows.Forms.Button();
@@ -84,8 +86,6 @@
             this.renameButton = new System.Windows.Forms.Button();
             this.deleteAllPanel = new System.Windows.Forms.Panel();
             this.autoDropPanel = new System.Windows.Forms.Panel();
-            this.movieSort = new System.Windows.Forms.Button();
-            this.subtitleSort = new System.Windows.Forms.Button();
             this.filePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filePanelSplitter)).BeginInit();
             this.filePanelSplitter.Panel1.SuspendLayout();
@@ -155,6 +155,17 @@
             this.subtitleGroupBox.TabIndex = 0;
             this.subtitleGroupBox.TabStop = false;
             this.subtitleGroupBox.Text = "Subtitles";
+            // 
+            // subtitleSort
+            // 
+            this.subtitleSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.subtitleSort.Location = new System.Drawing.Point(321, 399);
+            this.subtitleSort.Name = "subtitleSort";
+            this.subtitleSort.Size = new System.Drawing.Size(40, 23);
+            this.subtitleSort.TabIndex = 31;
+            this.subtitleSort.Text = "Sort";
+            this.subtitleSort.UseVisualStyleBackColor = true;
+            this.subtitleSort.Click += new System.EventHandler(this.subtitleSort_Click);
             // 
             // subtitleAutoFilter
             // 
@@ -263,6 +274,7 @@
             this.subtitleFileName});
             this.subtitleListView.FullRowSelect = true;
             this.subtitleListView.GridLines = true;
+            this.subtitleListView.HideSelection = false;
             this.subtitleListView.Location = new System.Drawing.Point(6, 19);
             this.subtitleListView.Name = "subtitleListView";
             this.subtitleListView.Size = new System.Drawing.Size(526, 374);
@@ -353,6 +365,17 @@
             this.movieGroupBox.TabStop = false;
             this.movieGroupBox.Text = "Movies";
             // 
+            // movieSort
+            // 
+            this.movieSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.movieSort.Location = new System.Drawing.Point(321, 399);
+            this.movieSort.Name = "movieSort";
+            this.movieSort.Size = new System.Drawing.Size(40, 23);
+            this.movieSort.TabIndex = 31;
+            this.movieSort.Text = "Sort";
+            this.movieSort.UseVisualStyleBackColor = true;
+            this.movieSort.Click += new System.EventHandler(this.movieSort_Click);
+            // 
             // movieAutoFilter
             // 
             this.movieAutoFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -397,6 +420,7 @@
             this.movieFileName});
             this.movieListView.FullRowSelect = true;
             this.movieListView.GridLines = true;
+            this.movieListView.HideSelection = false;
             this.movieListView.Location = new System.Drawing.Point(6, 19);
             this.movieListView.Name = "movieListView";
             this.movieListView.Size = new System.Drawing.Size(526, 374);
@@ -734,30 +758,10 @@
             this.autoDropPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.autoDropPanel_DragDrop);
             this.autoDropPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.autoDropPanel_DragEnter);
             // 
-            // movieSort
-            // 
-            this.movieSort.Location = new System.Drawing.Point(321, 399);
-            this.movieSort.Name = "movieSort";
-            this.movieSort.Size = new System.Drawing.Size(40, 23);
-            this.movieSort.TabIndex = 31;
-            this.movieSort.Text = "Sort";
-            this.movieSort.UseVisualStyleBackColor = true;
-            this.movieSort.Click += new System.EventHandler(this.movieSort_Click);
-            // 
-            // subtitleSort
-            // 
-            this.subtitleSort.Location = new System.Drawing.Point(321, 399);
-            this.subtitleSort.Name = "subtitleSort";
-            this.subtitleSort.Size = new System.Drawing.Size(40, 23);
-            this.subtitleSort.TabIndex = 31;
-            this.subtitleSort.Text = "Sort";
-            this.subtitleSort.UseVisualStyleBackColor = true;
-            this.subtitleSort.Click += new System.EventHandler(this.subtitleSort_Click);
-            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.deleteAllPanel);
             this.Controls.Add(this.autoDropPanel);

@@ -84,24 +84,33 @@ namespace SmartFileRename
         #endregion
 
         #region Clear
-        private void subtitleClear_Click(object sender, EventArgs e)
+
+
+        private void clearMovieList()
+        {
+            FormOperations.ClearEntry(movieFilePathList);
+            FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
+        }
+
+        private void clearSubtitleList()
         {
             FormOperations.ClearEntry(subtitleFilePathList);
             FormOperations.RefreshListViewCount(subtitleFilePathList, subtitleListView, subtitleFileCount);
+        }
+        private void subtitleClear_Click(object sender, EventArgs e)
+        {
+            clearSubtitleList();
         }
 
         private void movieClear_Click(object sender, EventArgs e)
         {
-            FormOperations.ClearEntry(movieFilePathList);
-            FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
+            clearMovieList();
         }
 
         private void deleteAllPanel_Click(object sender, EventArgs e)
         {
-            FormOperations.ClearEntry(subtitleFilePathList);
-            FormOperations.RefreshListViewCount(subtitleFilePathList, subtitleListView, subtitleFileCount);
-            FormOperations.ClearEntry(movieFilePathList);
-            FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
+            clearSubtitleList();
+            clearMovieList();
         }
         #endregion
 
@@ -395,6 +404,15 @@ namespace SmartFileRename
                 else
                 {
                     MessageBox.Show("All files have been renamed successfully.", "Conguratulations", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    if (optionClearSubtitlesAfterRename.Checked)
+                    {
+                        clearSubtitleList();
+                    }
+                    if (optionClearMoviesAfterRename.Checked)
+                    {
+                        clearMovieList();
+                    }
                 }
             }
             catch (ArgumentException ex)

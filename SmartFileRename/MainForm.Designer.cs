@@ -87,6 +87,8 @@
             this.deleteAllPanel = new System.Windows.Forms.Panel();
             this.autoDropPanel = new System.Windows.Forms.Panel();
             this.optionAlwaysOnTop = new System.Windows.Forms.CheckBox();
+            this.optionClearSubtitlesAfterRename = new System.Windows.Forms.CheckBox();
+            this.optionClearMoviesAfterRename = new System.Windows.Forms.CheckBox();
             this.filePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filePanelSplitter)).BeginInit();
             this.filePanelSplitter.Panel1.SuspendLayout();
@@ -716,7 +718,7 @@
             this.previewButton.Location = new System.Drawing.Point(1016, 626);
             this.previewButton.Name = "previewButton";
             this.previewButton.Size = new System.Drawing.Size(75, 23);
-            this.previewButton.TabIndex = 11;
+            this.previewButton.TabIndex = 13;
             this.previewButton.Text = "Preview";
             this.previewButton.UseVisualStyleBackColor = true;
             this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
@@ -727,7 +729,7 @@
             this.renameButton.Location = new System.Drawing.Point(1097, 626);
             this.renameButton.Name = "renameButton";
             this.renameButton.Size = new System.Drawing.Size(75, 23);
-            this.renameButton.TabIndex = 12;
+            this.renameButton.TabIndex = 14;
             this.renameButton.Text = "Rename";
             this.renameButton.UseVisualStyleBackColor = true;
             this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
@@ -766,16 +768,38 @@
             this.optionAlwaysOnTop.Location = new System.Drawing.Point(1016, 604);
             this.optionAlwaysOnTop.Name = "optionAlwaysOnTop";
             this.optionAlwaysOnTop.Size = new System.Drawing.Size(98, 17);
-            this.optionAlwaysOnTop.TabIndex = 10;
+            this.optionAlwaysOnTop.TabIndex = 12;
             this.optionAlwaysOnTop.Text = "Always On Top";
             this.optionAlwaysOnTop.UseVisualStyleBackColor = true;
             this.optionAlwaysOnTop.CheckedChanged += new System.EventHandler(this.OptionAlwaysOnTop_CheckedChanged);
+            // 
+            // optionClearSubtitlesAfterRename
+            // 
+            this.optionClearSubtitlesAfterRename.AutoSize = true;
+            this.optionClearSubtitlesAfterRename.Location = new System.Drawing.Point(1016, 558);
+            this.optionClearSubtitlesAfterRename.Name = "optionClearSubtitlesAfterRename";
+            this.optionClearSubtitlesAfterRename.Size = new System.Drawing.Size(155, 17);
+            this.optionClearSubtitlesAfterRename.TabIndex = 10;
+            this.optionClearSubtitlesAfterRename.Text = "Clear Subtitles after rename";
+            this.optionClearSubtitlesAfterRename.UseVisualStyleBackColor = true;
+            // 
+            // optionClearMoviesAfterRename
+            // 
+            this.optionClearMoviesAfterRename.AutoSize = true;
+            this.optionClearMoviesAfterRename.Location = new System.Drawing.Point(1016, 581);
+            this.optionClearMoviesAfterRename.Name = "optionClearMoviesAfterRename";
+            this.optionClearMoviesAfterRename.Size = new System.Drawing.Size(149, 17);
+            this.optionClearMoviesAfterRename.TabIndex = 11;
+            this.optionClearMoviesAfterRename.Text = "Clear Movies after rename";
+            this.optionClearMoviesAfterRename.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.optionClearMoviesAfterRename);
+            this.Controls.Add(this.optionClearSubtitlesAfterRename);
             this.Controls.Add(this.optionAlwaysOnTop);
             this.Controls.Add(this.deleteAllPanel);
             this.Controls.Add(this.autoDropPanel);
@@ -866,6 +890,8 @@
         private System.Windows.Forms.Button subtitleSort;
         private System.Windows.Forms.Button movieSort;
         private System.Windows.Forms.CheckBox optionAlwaysOnTop;
+        private System.Windows.Forms.CheckBox optionClearSubtitlesAfterRename;
+        private System.Windows.Forms.CheckBox optionClearMoviesAfterRename;
     }
 }
 

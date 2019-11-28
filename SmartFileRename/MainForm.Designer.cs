@@ -761,6 +761,7 @@
             // 
             // optionAlwaysOnTop
             // 
+            this.optionAlwaysOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.optionAlwaysOnTop.AutoSize = true;
             this.optionAlwaysOnTop.Location = new System.Drawing.Point(1016, 604);
             this.optionAlwaysOnTop.Name = "optionAlwaysOnTop";

@@ -19,6 +19,37 @@ namespace SmartFileRename
         public MainForm()
         {
             InitializeComponent();
+
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                if (File.Exists(arg))
+                {
+                    if (FileDataInfo.ParseFileType(arg) == FileDataInfo.FileTypeEnum.Movie)
+                    {
+                        movieFilePathList.Add(arg);
+                    }
+                    else if (FileDataInfo.ParseFileType(arg) == FileDataInfo.FileTypeEnum.Subtitle)
+                    {
+                        subtitleFilePathList.Add(arg);
+                    }
+                }
+
+                if (Directory.Exists(arg))
+                {
+                    subtitleFilePathList.AddRange(Directory.EnumerateFiles(arg).Select(x => new FileDataInfo(x)).Where(x => x.FileType == FileDataInfo.FileTypeEnum.Subtitle));
+                    movieFilePathList.AddRange(Directory.EnumerateFiles(arg).Select(x => new FileDataInfo(x)).Where(x => x.FileType == FileDataInfo.FileTypeEnum.Movie));
+                }
+            }
+
+            FormOperations.RefreshListViewCount(subtitleFilePathList, subtitleListView, subtitleFileCount);
+            FormOperations.RefreshListViewCount(movieFilePathList, movieListView, movieFileCount);
+        }
+
+        public MainForm(string[] argv)
+        {
+            InitializeComponent();
+
+
         }
 
         private void MainForm_Load(object sender, EventArgs e)

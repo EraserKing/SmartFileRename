@@ -1,0 +1,58 @@
+<Window
+    x:Class="SmartFileRenameWinUI.ResultWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SmartFileRenameWinUI"
+    Title="Preview">
+
+    <Grid Padding="16" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Column headers -->
+        <Grid Grid.Row="0" Padding="12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Before rename" FontWeight="Bold" Grid.Column="0"/>
+            <TextBlock Text="After rename" FontWeight="Bold" Grid.Column="1"/>
+        </Grid>
+
+        <!-- Result list -->
+        <ListView x:Name="resultListView" Grid.Row="1"
+                  SelectionMode="None"
+                  ContainerContentChanging="ResultListView_ContainerContentChanging">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:RenameResultItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind OriginalDisplay}" Grid.Column="0"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="0,0,12,0"/>
+                        <TextBlock Text="{x:Bind NewDisplay}" Grid.Column="1"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Bottom bar -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="showFileNameOnly" Content="Show file name only"
+                      Checked="ShowFileNameOnly_Changed"
+                      Unchecked="ShowFileNameOnly_Changed"/>
+            <Button Grid.Column="1" Content="Close" Click="ButtonClose_Click"/>
+        </Grid>
+    </Grid>
+</Window>

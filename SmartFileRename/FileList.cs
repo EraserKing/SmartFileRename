@@ -36,7 +36,8 @@ namespace SmartFileRename
             "jp", "JP",
             "jpn", "JPN",
             "en", "EN",
-            "eng", "ENG"
+            "eng", "ENG",
+            "uni_gb", "uni_big5"
         };
 
         public string FilePath { get; }
